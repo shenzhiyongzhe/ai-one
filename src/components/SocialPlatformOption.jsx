@@ -46,10 +46,10 @@ const SocialPlatformOption = ({ type, onChange }) =>
                 <label key={option.id} className="flex items-center gap-2">
                     <input
                         type={type}
-                        value={option.label}
+                        value={option.name}
                         checked={
-                            type === 'radio' ? selectedValues[0] === option.label :
-                                selectedValues.includes(option.label)
+                            type === 'radio' ? selectedValues[0] === option.name :
+                                selectedValues.includes(option.name)
                         }
                         onChange={handleChange}
                         className="form-radio h-4 w-4 text-indigo-600"

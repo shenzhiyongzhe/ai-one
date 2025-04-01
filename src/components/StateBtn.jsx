@@ -1,6 +1,6 @@
 import { useState } from "react";
 // eslint-disable-next-line react/prop-types
-const Button = ({ onClick, text = "确定", bg = "bg-teal-500", className }) =>
+const StateBtn = ({ onClick, text = "确定", bg = "bg-teal-500", className }) =>
 {
     const [isDisabled, setIsDisabled] = useState(false);
     const handleClick = async () =>
@@ -28,4 +28,4 @@ const Button = ({ onClick, text = "确定", bg = "bg-teal-500", className }) =>
         </button >
     )
 }
-export default Button
+export default StateBtn

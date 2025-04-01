@@ -8,6 +8,7 @@ import CommentPage from "./page/CommentPage";
 import LivePage from "./page/LivePage";
 import PrivateRoute from './components/PrivateRoute';
 import LoginPage from "./page/LoginPage";
+import RegisterPage from "./page/Register";
 
 
 export default function App()
@@ -24,6 +25,10 @@ export default function App()
                     <Route
                         path="/login"
                         element={<LoginPage />}
+                    />
+                    <Route
+                        path="/register"
+                        element={<RegisterPage />}
                     />
                     <Route element={<PrivateRoute />}>
                         <Route

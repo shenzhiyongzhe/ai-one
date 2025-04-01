@@ -3,7 +3,7 @@
 // const location = useLocation();
 const initialState = {
     isCollapsed: false,
-    selectedKey: 'home', // 默认选中的菜单项
+    selectedKey: '/', // 默认选中的菜单项
     menuItems: [
         { key: 'home', label: 'home', icon: 'dashboard' },
         { key: 'users', label: 'Users', icon: 'user' },

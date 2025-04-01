@@ -1,10 +1,26 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-*{
-    @apply transition-colors duration-200;
+* {
+  @apply transition-colors duration-200;
+}
+.confirm-btn {
+  @apply bg-[#4376e0] text-white px-12 py-1 rounded-xl mr-20;
+}
+.input-focus {
+  @apply focus:outline-none  focus:ring-indigo-500 focus:border-indigo-500;
+}
+.primary-input {
+  @apply border-2 rounded-lg py-1 px-2;
+}
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

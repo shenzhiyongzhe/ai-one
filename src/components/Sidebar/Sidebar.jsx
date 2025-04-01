@@ -4,26 +4,28 @@ import { sidebarLinks } from "../../constants";
 import { useSelector, useDispatch } from 'react-redux';
 import logo from '/logo.png'
 import { useEffect } from "react";
+import { useLocation } from 'react-router-dom';
 
 const LinkItem = ({ title, icon: Icon, href }) =>
 {
     // 根据 URL 路径设置默认激活的标签
-    const { isCollapsed, selectedKey, menuItems } = useSelector(state => state.navigation);
+    const {
+        // isCollapsed,
+        selectedKey,
+        //   menuItems
+    } = useSelector(state => state.navigation);
     const dispatch = useDispatch();
 
-    const toggleSidebar = () =>
-    {
-        dispatch({ type: 'TOGGLE_SIDEBAR' });
-    };
+    // const toggleSidebar = () =>
+    // {
+    //     dispatch({ type: 'TOGGLE_SIDEBAR' });
+    // };
 
     const selectMenuItem = (key) =>
     {
         dispatch({ type: 'SELECT_MENU_ITEM', payload: key });
     };
-    // useEffect(() =>
-    // {
-    //     dispatch({ type: 'SELECT_MENU_ITEM', payload: href.split('/')[1] });
-    // }, [])
+
 
     return (
         <li className={`flex items-center cursor-pointer   rounded-lg
@@ -42,6 +44,15 @@ const LinkItem = ({ title, icon: Icon, href }) =>
 
 const Sidebar = () =>
 {
+    const dispatch = useDispatch();
+    const location = useLocation();
+
+    useEffect(() =>
+    {
+        const pathName = location.pathname.split("/")[1]
+        dispatch({ type: 'SELECT_MENU_ITEM', payload: pathName });
+    }, [0])
+
     return (
         <aside
             className={`flex flex-col h-screen px-6 pt-16 border-r-2  border-zinc-100 `}

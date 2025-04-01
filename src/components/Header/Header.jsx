@@ -1,4 +1,5 @@
-import { BiHomeAlt2 } from "react-icons/bi"
+import { GoHome } from "react-icons/go";
+
 import Management from "../Management/Management"
 import { useNavigate } from 'react-router-dom';
 
@@ -14,7 +15,7 @@ const Header = () =>
         <div className="flex justify-between items-center bg-white min-w-[900px] px-5 py-4 rounded-md shadow-md">
             <Management />
             <div className="flex justify-center items-center gap-2 hover:cursor-pointer" onClick={backHomeClick}>
-                <BiHomeAlt2 />
+                <GoHome className="text-2xl" />
                 <span>返回首页</span>
             </div>
         </div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { userLoginRequest } from '../utils/index';
+import { userLoginRequest } from '../utils/http';
 import { RiSmartphoneLine } from "react-icons/ri";
 
 const LoginPage = () =>
@@ -28,14 +28,36 @@ const LoginPage = () =>
         }));
     };
 
+    const jumpToRegisterPage = () =>
+    {
+        navigate('/register');
+    }
+    function decodeToken(token)
+    {
+        try
+        {
+            const base64Url = token.split('.')[1];
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c)
+            {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+
+            return JSON.parse(jsonPayload);
+        } catch (e)
+        {
+            console.error("Failed to decode token:", e);
+            return null;
+        }
+    }
     useEffect(() =>
     {
         const token = localStorage.getItem('token');
-        console.log("use token" + token)
         if (token)
         {
             console.log("登录成功")
-            navigate('/home', { replace: true });
+            // navigate('/home', { replace: true });
+
         }
     })
 
@@ -48,6 +70,7 @@ const LoginPage = () =>
             return false;
         }
         const res = await userLoginRequest(formData)
+        console.log(res)
         if (res.data.code == 200 && res.data.message == "登录成功")
         {
             console.log("登录成功")
@@ -55,6 +78,11 @@ const LoginPage = () =>
             localStorage.setItem("token", res.data.data.token)
             console.log("token:" + res.data.data.token)
             navigate('/home', { replace: true });
+        }
+        else if (res.data.message == "账号或密码错误")
+        {
+            alert("账号或密码错误")
+
         }
         else
         {
@@ -161,7 +189,7 @@ const LoginPage = () =>
                             </div>
                         )}
                         <div className='flex justify-between pt-6 text-zinc-600'>
-                            <div>还没有账号？<span className='text-blue-500'>立即注册</span></div>
+                            <div className='hover:cursor-pointer' onClick={jumpToRegisterPage}>还没有账号？<span className='text-blue-500' >立即注册</span></div>
                             <div className='text-blue-500'>忘记密码？</div>
                         </div>
                     </div>
