@@ -57,7 +57,7 @@ const FileUpload = ({ onFileSelected }) =>
             onDrop={handleDrop}
             onClick={handleButtonClick}
         >
-            <div className="text-lg  mb-4 flex flex-col items-center ">
+            <div className="text-lg  mb-4 flex flex-col items-center hover:cursor-pointer">
                 <div className="flex flex-col justify-center items-center" >
                     {files.length > 0 ? (
                         <div className=" flex justify-center items-center gap-20 mt-4">
@@ -67,7 +67,7 @@ const FileUpload = ({ onFileSelected }) =>
                                 src={videoUrl}
                             />
                             <div className="text-zinc-500 min-w-32">
-                                <div>重新上传</div>
+                                <div >重新上传</div>
                                 <ul className="mt-4 text-sm text-gray-700">
                                     {files.map((file, index) => (
                                         <li key={index} className="mb-2">

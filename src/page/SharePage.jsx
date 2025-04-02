@@ -62,64 +62,52 @@ const SharePage = () =>
         const end_time = endTimeRef.current.value;
         const duration = parseInt(durationInputRef.current.value);
         const repeat = repeatNum
-        const formData = { action_type, platforms: selectedPlatform, duration, repeat, quantity: count, start_time, end_time }
+        const url = fileLinkRef.current.value;
+        const formData = { action_type, file: selectedFile, url, platforms: selectedPlatform, duration, repeat, quantity: count, start_time, end_time }
 
-        // console.log("post data:" + JSON.stringify(formData))
-        //校验用户输入
-        if (!selectedFile && !fileLinkRef.current.value)
-        {
-            setPopupContent({ title: "文件为空", content: "请上传文件或粘贴链接" })
-            openModal()
-            return;
-        }
-        if (!title)
-        {
-            setPopupContent({ title: "标题为空", content: "请输入你想说的标题" })
-            openModal()
-            return;
-        }
-        if (selectedPlatform.length == 0)
-        {
-            setPopupContent({ title: "未选择点赞平台", content: "请选择一个点赞平台" })
-            openModal()
-            return;
-        }
-        if (!start_time)
-        {
-            setPopupContent({ title: "未选择开始时间", content: "请选择开始时间" })
-            openModal()
-            return;
-        }
-        if (!end_time)
-        {
-            setPopupContent({ title: "未选择结束时间", content: "请选择结束时间" })
-            openModal()
-            return;
-        }
-        if (!duration)
-        {
-            setPopupContent({ title: "未选择停留时间", content: "请填写停留时间" })
-            openModal()
-            return;
-        }
         const startDate = new Date(start_time.replace('T', ' '));
         const endDate = new Date(end_time.replace('T', ' '));
         const now = new Date();
-        if (startDate < now)
+        console.log(JSON.stringify(formData))
+
+        if (!selectedFile && !url)
         {
-            setPopupContent({ title: "填写时间错误", content: "开始时间不能是过去时间" })
-            openModal()
-            return;
+            setPopupContent({ title: "文件为空", content: "请上传文件或粘贴链接" })
+
+        }
+        else if (!title)
+        {
+            setPopupContent({ title: "标题为空", content: "请输入你想说的标题" })
+        }
+        else if (selectedPlatform.length == 0)
+        {
+            setPopupContent({ title: "未选择点赞平台", content: "请选择一个点赞平台" })
+        }
+        else if (!start_time)
+        {
+            setPopupContent({ title: "未选择开始时间", content: "请选择开始时间" })
+        }
+        else if (!end_time)
+        {
+            setPopupContent({ title: "未选择结束时间", content: "请选择结束时间" })
+        }
+        else if (!duration)
+        {
+            setPopupContent({ title: "未选择停留时间", content: "请填写停留时间" })
         }
 
-        if (endDate <= startDate)
+        else if (startDate < now)
+        {
+            setPopupContent({ title: "填写时间错误", content: "开始时间不能是过去时间" })
+        }
+
+        else if (endDate <= startDate)
         {
             setPopupContent({ title: "填写时间错误", content: "结束时间不能早于开始时间" })
-            openModal()
-            return;
+
         }
-        console.log(JSON.stringify(formData))
-        const res = await GenerateTaskRequest(selectedFile, formData)
+
+        const res = await GenerateTaskRequest(formData)
         if (res.data)
         {
             setPopupContent({ title: "发送结果", content: res.data.message })

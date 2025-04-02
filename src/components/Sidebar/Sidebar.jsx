@@ -28,10 +28,10 @@ const LinkItem = ({ title, icon: Icon, href }) =>
 
 
     return (
-        <li className={`flex items-center cursor-pointer   rounded-lg
-          ${selectedKey == href.split('/')[1] ? "bg-[#e42c2a] text-white" : "hover:bg-[#e6f0ff] "}`}
+        <li className={`flex items-center cursor-pointer  rounded-lg transition-all duration-300 ease-in-out 
+          ${selectedKey == href.split('/')[1] ? "bg-[#e42c2a]  text-white" : "hover:bg-[#e6f0ff] "}`}
             onClick={() => selectMenuItem(href.split('/')[1])}>
-            <Icon className="mr-2 ml-4 text-2xl" />
+            <Icon className="mr-2 ml-4 text-[24px]" />
             <Link
                 to={href}
                 className={`flex items-center p-2  rounded-lg  `}
@@ -57,11 +57,11 @@ const Sidebar = () =>
         <aside
             className={`flex flex-col h-screen px-6 pt-16 border-r-2  border-zinc-100 `}
         >
-            <div className="flex justify-center  ">
+            <div className="flex justify-center">
                 <img src={logo} className="w-34 " ></img>
             </div>
             <div className="pt-12 ">
-                <ul className=" flex flex-col gap-6">
+                <ul className=" flex flex-col gap-6  text-zinc-700">
                     {sidebarLinks.map((link, index) => (
                         <LinkItem {...link} key={index} />
                     ))}

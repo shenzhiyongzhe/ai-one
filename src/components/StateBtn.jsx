@@ -18,9 +18,9 @@ const StateBtn = ({ onClick, text = "确定", bg = "bg-teal-500", className }) =
         <button
             onClick={handleClick}
             disabled={isDisabled}
-            className={`${isDisabled ? "bg-neutral-500" : bg} rounded-full 
+            className={`${isDisabled ? "bg-[#356be0]" : bg} rounded-full 
             ${isDisabled ? "cursor-progress" : "cursor-pointer"}
-            ${isDisabled ? "hover:bg-neutral-700" : "hover:bg-teal-700"}
+            ${isDisabled ? "hover:bg-[#304574]" : "hover:bg-[#1d3363]"}
              text-white text-sm px-5 py-2
                ${className}`}
         >

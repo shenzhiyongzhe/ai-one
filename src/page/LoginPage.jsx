@@ -42,7 +42,7 @@ const LoginPage = () =>
             {
                 return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
             }).join(''));
-
+            console.log("json payload" + jsonPayload)
             return JSON.parse(jsonPayload);
         } catch (e)
         {
@@ -56,6 +56,7 @@ const LoginPage = () =>
         if (token)
         {
             console.log("登录成功")
+            decodeToken(token)
             // navigate('/home', { replace: true });
 
         }
@@ -76,7 +77,7 @@ const LoginPage = () =>
             console.log("登录成功")
             console.log(res)
             localStorage.setItem("token", res.data.data.token)
-            console.log("token:" + res.data.data.token)
+            decodeToken(res.data.data.token)
             navigate('/home', { replace: true });
         }
         else if (res.data.message == "账号或密码错误")

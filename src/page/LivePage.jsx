@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom';
 import Popup from "../components/Popup";
 import { useState, useRef } from "react";
 import { LinkValidation } from "../utils/tool";
+import { GenerateTaskRequest } from "../utils/http";
 
 const LivePage = () =>
 {
@@ -42,57 +43,59 @@ const LivePage = () =>
 
         const start_time = startTimeRef.current.value;
         const end_time = endTimeRef.current.value;
-
-        const formData = { action_type, anchor_id, url, platforms: selectedPlatform, quantity: count, start_time, end_time }
-
-        console.log(JSON.stringify(formData))
-        if (!anchor_id && !url)
-        {
-            setPopupContent({ title: "未填写必要参数", content: "请填写主播ID或url" })
-            openModal()
-            return;
-        }
-
-        if (!LinkValidation(url))
-        {
-            setPopupContent({ title: "url格式错误", content: "请输入有效链接" })
-            openModal()
-            return;
-        }
-        if (selectedPlatform.length == 0)
-        {
-            setPopupContent({ title: "未选择点赞平台", content: "请选择一个点赞平台" })
-            openModal()
-            return;
-        }
-        if (!start_time)
-        {
-            setPopupContent({ title: "填写时间错误", content: "请输入开始时间" })
-            openModal()
-            return;
-        }
         const startDate = new Date(start_time.replace('T', ' '));
         const endDate = new Date(end_time.replace('T', ' '));
         const now = new Date();
-        if (!start_time)
+
+
+        if (!anchor_id && !url)
         {
-            setPopupContent({ title: "填写时间错误", content: "请输入开始时间" })
-            openModal()
-            return;
-        }
-        if (startDate < now)
-        {
-            setPopupContent({ title: "填写时间错误", content: "开始时间不能是过去时间" })
-            openModal()
-            return;
+            setPopupContent({ title: "未填写必要参数", content: "请填写主播ID或url" })
         }
 
-        if (endDate <= startDate)
+        else if (url && !LinkValidation(url))
+        {
+            setPopupContent({ title: "url格式错误", content: "请输入有效链接" })
+        }
+        else if (selectedPlatform.length == 0)
+        {
+            setPopupContent({ title: "未选择点赞平台", content: "请选择一个点赞平台" })
+        }
+        else if (!start_time)
+        {
+            setPopupContent({ title: "填写时间错误", content: "请输入开始时间" })
+        }
+
+        else if (!end_time)
+        {
+            setPopupContent({ title: "填写时间错误", content: "请输入结束时间" })
+        }
+        else if (startDate < now)
+        {
+            setPopupContent({ title: "填写时间错误", content: "开始时间不能是过去时间" })
+        }
+
+        else if (endDate <= startDate)
         {
             setPopupContent({ title: "填写时间错误", content: "结束时间不能早于开始时间" })
-            openModal()
-            return;
         }
+        else
+        {
+            const params = { action_type, anchor_id, url, platforms: selectedPlatform, quantity: count, start_time, end_time }
+
+            const res = await GenerateTaskRequest(params)
+            if (res.data)
+            {
+                setPopupContent({ title: "发送结果", content: res.data.message })
+            }
+            else
+            {
+                setPopupContent({ title: "服务器错误", content: "发送数据失败" })
+            }
+            console.log("res:" + JSON.stringify(res))
+            console.log("params:" + JSON.stringify(params))
+        }
+        openModal()
     }
     return (
         <MainView>
@@ -110,7 +113,7 @@ const LivePage = () =>
                     </div>
                     <div className="flex flex-col gap-4 text-zinc-600">
                         <h1>选择平台直播间</h1>
-                        <SocialPlatformOption type={"checkbox"} onChange={handleSelectionChange} />
+                        <SocialPlatformOption type={"radio"} onChange={handleSelectionChange} />
                     </div>
                     <div className="flex gap-5 text-zinc-600 items-center ">
                         <span>起止时间</span>
