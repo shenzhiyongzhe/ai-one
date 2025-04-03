@@ -1,6 +1,5 @@
 import Header from "../components/Header/Header"
 import { MainView } from "../components/MainView/MainView"
-import { MdOutlinePersonSearch } from "react-icons/md";
 import SocialPlatformOption from "../components/SocialPlatformOption";
 import CounterButton from "../components/CounterButton";
 import { useRef, useState } from "react";
@@ -99,9 +98,11 @@ const CommentPage = () =>
         <MainView>
             <div className="flex flex-col gap-6 ">
                 <Header />
-                <div className="flex flex-col gap-10 bg-white min-w-[900px] px-5 py-4 rounded-md shadow-md">
-                    <div className="flex items-end gap-2">
-                        <MdOutlinePersonSearch className="text-[48px] text-[#3ed0c1]" />
+                <div className="flex flex-col gap-10 bg-white min-w-[900px] px-10 py-4 rounded-md shadow-md">
+                    <div className="flex items-end gap-2 mt-4">
+                        <div>
+                            <img src="/评论回复.png" alt="" />
+                        </div>
                         <div className="text-zinc-500 pb-1">输入你想要点赞的用户或对象</div>
                     </div>
                     <div className="flex gap-6 items-center text-zinc-600">

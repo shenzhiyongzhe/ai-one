@@ -101,7 +101,7 @@ const LivePage = () =>
         <MainView>
             <div className="flex flex-col gap-6">
                 <Header />
-                <div className="flex flex-col gap-10 bg-white min-w-[900px] px-5 py-4 rounded-md shadow-md">
+                <div className="flex flex-col gap-10 bg-white min-w-[900px] px-10 py-4 rounded-md shadow-md">
                     <div className="flex items-end gap-2">
                         <div><img src="/live.png" alt="" /></div>
                         <span>输入直播间的ID或对象</span>

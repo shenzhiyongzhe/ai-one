@@ -125,7 +125,7 @@ const SharePage = () =>
             <div className="flex flex-col gap-6 ">
                 <Header />
 
-                <div className="flex justify-center items-center bg-white min-w-[900px] px-5 py-4 rounded-md shadow-md gap-20">
+                <div className="flex justify-center items-center bg-white min-w-[900px] px-10 py-4 rounded-md shadow-md gap-20">
                     <FileUpload onFileSelected={handleFileSelected} />
                     <div className="text-zinc-500">或</div>
                     <div className="flex flex-col gap-2 border-2">
@@ -139,7 +139,7 @@ const SharePage = () =>
 
                     </div>
                 </div>
-                <div className="bg-white min-w-[900px] px-5 py-4 rounded-md shadow-md">
+                <div className="bg-white min-w-[900px] px-10 py-4 rounded-md shadow-md">
                     <div className="flex items-center gap-2">
                         <MdOutlineTopic className="text-blue-400 text-2xl" />标题
                     </div>
